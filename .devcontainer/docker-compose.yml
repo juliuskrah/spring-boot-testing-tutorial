@@ -1,0 +1,21 @@
+version: '3'
+
+services: 
+  app:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+      args: 
+        VARIANT: 16
+        INSTALL_MAVEN: "true"
+        INSTALL_GRADLE: "false"
+        NODE_VERSION": "none"
+        USER_UID: 1000
+        USER_GID: 1000
+    volumes:
+    - ..:/workspace:cached
+    command: sleep infinity
+    user: vscode
+    network_mode: service:db
+
+  

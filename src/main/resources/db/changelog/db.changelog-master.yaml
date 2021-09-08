@@ -1,0 +1,202 @@
+############################################################################
+# For an application to remain maintainable, changes to the                #
+# database schema must be tracked, similar to how you track                #
+# git changes.                                                             #
+#                                                                          #
+# We are using <a href="https://www.liquibase.org/">liquibase </a>         #  
+# You can read more on how to use liquibase in a spring boot               #
+# application here                                                         #
+# https://docs.liquibase.com/tools-integrations/springboot/springboot.html #
+############################################################################
+
+databaseChangeLog:
+  
+  - property:
+      name: now
+      value: current_timestamp
+      dbms: postgresql
+  
+  - changeSet:
+      id: 1
+      author: Julius
+      changes:
+      - createTable:
+          tableName: client
+          columns:
+          - column:
+              name: id
+              type: UUID
+              constraints:
+                primaryKey: true
+                nullable: false  
+          - column:
+              name: name
+              type: VARCHAR(60)
+              constraints:
+                nullable: false
+          - column:
+              name: code
+              type: VARCHAR(60)
+              constraints:
+                nullable: false
+          - column:
+              name: contact_person
+              type: VARCHAR(100)
+      - createTable:
+          tableName: service
+          columns:
+          - column:
+              name: id
+              type: UUID
+              constraints:
+                primaryKey: true
+                nullable: false
+          - column:
+              name: name
+              type: VARCHAR(60)
+              constraints:
+                nullable: false
+          - column:
+              name: code
+              type: VARCHAR(60)
+              constraints:
+                nullable: false
+          - column:
+              name: client_id
+              type: UUID
+              constraints:
+                nullable: false
+          - column:
+              name: currency
+              type: VARCHAR(12)
+          - column:
+              name: queue_name
+              type: VARCHAR(100)
+      - createTable:
+          tableName: service_setting
+          columns:
+          - column:
+              name: service_id
+              type: UUID
+              constraints:
+                nullable: false
+          - column:
+              name: payer_client_id
+              type: UUID
+              constraints:
+                nullable: false
+          - column:
+              name: receiver_client_id
+              type: UUID
+              constraints:
+                nullable: false
+          - column:
+              name: collection_account
+              type: VARCHAR(100)
+          - column:
+              name: notify_customer
+              type: BOOLEAN
+          - column:
+              name: acknowledge_payer
+              type: BOOLEAN
+          - column:
+              name: sms_source_address
+              type: VARCHAR(11)	
+          - column:
+              name: float_amount
+              type: DOUBLE
+  - changeSet:
+      id: 2
+      author: Julius
+      changes:
+      - createIndex:
+            indexName: idx_client_code
+            tableName: client
+            unique: true
+            columns:
+              - column:
+                  name: code
+                  type: varchar(60)
+      - createIndex:
+            indexName: idx_client_name
+            tableName: client
+            unique: true
+            columns:
+              - column:
+                  name: name
+                  type: varchar(60)
+      - createIndex:
+            indexName: idx_service_code
+            tableName: service
+            unique: true
+            columns:
+              - column:
+                  name: code
+                  type: varchar(60)
+      - createIndex:
+            indexName: idx_service_name
+            tableName: service
+            unique: true
+            columns:
+              - column:
+                  name: name
+                  type: varchar(60)
+
+  - changeSet:
+      id: 3
+      author: Julius
+      changes:
+      - addPrimaryKey:
+          columnNames: service_id, payer_client_id, receiver_client_id
+          tableName: service_setting
+      - addForeignKeyConstraint:
+          baseColumnNames: client_id
+          baseTableName: service
+          constraintName: fk_service_client_id
+          referencedColumnNames: id
+          referencedTableName: client
+      - addForeignKeyConstraint:
+          baseColumnNames: service_id
+          baseTableName: service_setting
+          constraintName: fk_service_id
+          referencedColumnNames: id
+          referencedTableName: service
+      - addForeignKeyConstraint:
+          baseColumnNames: payer_client_id
+          baseTableName: service_setting
+          constraintName: fk_payer_client_id
+          referencedColumnNames: id
+          referencedTableName: client
+      - addForeignKeyConstraint:
+          baseColumnNames: receiver_client_id
+          baseTableName: service_setting
+          constraintName: fk_receiver_client_id
+          referencedColumnNames: id
+          referencedTableName: client
+
+  - changeSet:
+      id: 4
+      author: Julius
+      changes:
+      - loadData:
+          encoding: UTF-8
+          file: db/data/client.csv
+          separator: ;
+          tableName: client
+      - loadData:
+          encoding: UTF-8
+          file: db/data/service.csv
+          separator: ;
+          tableName: service
+    # - loadData:
+    #     encoding: UTF-8
+    #     file: db/data/service_setting.csv
+    #     separator: ;
+    #     tableName: service_setting
+    #     columns:
+    #     - column:
+    #         name: notify_customer
+    #         type: boolean
+    #     - column:
+    #         name: acknowledge_payer
+    #         type: timestamp

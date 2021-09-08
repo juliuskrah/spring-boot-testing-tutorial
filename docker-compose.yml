@@ -1,0 +1,15 @@
+version: '3'
+
+services: 
+  db:
+    image: postgres:13
+    restart: unless-stopped
+    volumes:
+      - postgresdb-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: juliusPass
+      POSTGRES_USER: julius
+      POSTGRES_DB: springtesting
+
+volumes:
+  postgresdb-data:
