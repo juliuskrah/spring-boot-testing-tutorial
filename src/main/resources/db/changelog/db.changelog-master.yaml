@@ -7,6 +7,7 @@
 # You can read more on how to use liquibase in a spring boot               #
 # application here                                                         #
 # https://docs.liquibase.com/tools-integrations/springboot/springboot.html #
+# @author Julius Krah                                                      #
 ############################################################################
 
 databaseChangeLog:
@@ -188,15 +189,15 @@ databaseChangeLog:
           file: db/data/service.csv
           separator: ;
           tableName: service
-    # - loadData:
-    #     encoding: UTF-8
-    #     file: db/data/service_setting.csv
-    #     separator: ;
-    #     tableName: service_setting
-    #     columns:
-    #     - column:
-    #         name: notify_customer
-    #         type: boolean
-    #     - column:
-    #         name: acknowledge_payer
-    #         type: timestamp
+      - loadData:
+          encoding: UTF-8
+          file: db/data/service_setting.csv
+          separator: ;
+          tableName: service_setting
+          columns:
+          - column:
+              name: notify_customer
+              type: boolean
+          - column:
+              name: acknowledge_payer
+              type: boolean

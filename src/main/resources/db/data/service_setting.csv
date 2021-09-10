@@ -1,6 +1,6 @@
 service_id;payer_client_id;receiver_client_id;collection_account;notify_customer;acknowledge_payer;sms_source_address;float_amount
-7374fd6d-03e3-498f-869f-b0144445d096;ce74d8f2-ef49-4f2a-b5cc-52ef30046d40;9f71d01e-5695-4379-a924-ca6dc316175b;A secret offshore account;true;true;EVIL;
-5e4be620-6be0-4526-8369-6d9ef4752580;ce74d8f2-ef49-4f2a-b5cc-52ef30046d40;9f71d01e-5695-4379-a924-ca6dc316175b;A secret offshore account;false;true;EVIL;
-69fe1c30-57c0-44b4-a1cb-b398890174f3;ce74d8f2-ef49-4f2a-b5cc-52ef30046d40;b0c02363-5031-4c0c-9a83-f242df4039b1;;false;false;;1000.00
+7374fd6d-03e3-498f-869f-b0144445d096;ce74d8f2-ef49-4f2a-b5cc-52ef30046d40;9f71d01e-5695-4379-a924-ca6dc316175b;A secret offshore account;true;true;EVIL;0.00
+5e4be620-6be0-4526-8369-6d9ef4752580;ce74d8f2-ef49-4f2a-b5cc-52ef30046d40;9f71d01e-5695-4379-a924-ca6dc316175b;A secret offshore account;false;true;EVIL;0.00
+69fe1c30-57c0-44b4-a1cb-b398890174f3;ce74d8f2-ef49-4f2a-b5cc-52ef30046d40;b0c02363-5031-4c0c-9a83-f242df4039b1;;false;true;;1000.00
 69fe1c30-57c0-44b4-a1cb-b398890174f3;9f71d01e-5695-4379-a924-ca6dc316175b;b0c02363-5031-4c0c-9a83-f242df4039b1;;false;false;;9009.99
 69fe1c30-57c0-44b4-a1cb-b398890174f3;15759e2d-21ab-4ec2-bb9a-2aee55c409fe;b0c02363-5031-4c0c-9a83-f242df4039b1;;true;true;;1999.00

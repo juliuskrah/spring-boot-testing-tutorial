@@ -8,8 +8,11 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
+/**
+ * @author Julius Krah
+ */
 @DataJpaTest
-public class ClientRepositoryTest {
+class ClientRepositoryTest {
     @Autowired
     private ClientRepository clientRepository;
 
@@ -35,7 +38,7 @@ public class ClientRepositoryTest {
     @DisplayName("Test find by Client name contains")
     void testFindByClientNameContains() {
         var clients = clientRepository.findByNameContainingIgnoreCase("corp");
-        assertThat(clients).isNotNull()
+        assertThat(clients).isNotEmpty()
           .hasSize(2)
           .anySatisfy(client -> {
             assertThat(client).hasFieldOrPropertyWithValue("name", "evil corp");
@@ -47,7 +50,7 @@ public class ClientRepositoryTest {
     @DisplayName("Test find by Contact person contains")
     void testFindByContactPerson() {
         var clients = clientRepository.findByContactPersonContainingIgnoreCase("We");
-        assertThat(clients).isNotNull()
+        assertThat(clients).isNotEmpty()
           .hasSize(2)
           .areAtLeast(1, new Condition<>(client -> 
             client.getName().contains("freedom"), "Client is 'freedom limited'"));

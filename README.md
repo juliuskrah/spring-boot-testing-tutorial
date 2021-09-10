@@ -22,6 +22,7 @@ There are two branches in this repository:
 |  |  |__java/
 |  |  |  |__com/juliuskrah/demos/springboottestingtraining/
 |  |  |  |  |__SpringBootTestingTrainingApplication.java
+|  |  |  |  |  |__dto/
 |  |  |  |  |  |__model/
 |  |  |  |  |  |  |__Client.java
 |  |  |  |  |  |  |__Service.java
@@ -29,6 +30,11 @@ There are two branches in this repository:
 |  |  |  |  |  |  |__ServiceSettingId.java
 |  |  |  |  |  |__repository/
 |  |  |  |  |  |  |__ClientRepository.java
+|  |  |  |  |  |  |__ServiceRepository.java
+|  |  |  |  |  |  |__ServiceSettingRepository.
+|  |  |  |  |  |__service/
+|  |  |  |  |  |  |__ClientService.java
+|  |  |  |  |  |  |__ClientServiceImpl.java
 |  |  |__resources/
 |  |  |  |__db/
 |  |  |  |  |__changelog/
@@ -44,7 +50,12 @@ There are two branches in this repository:
 |  |  |  |  |__SpringBootTestingTrainingApplication.java
 |  |  |  |  |  |__repository/
 |  |  |  |  |  |  |__ClientRepositoryTest.java
+|  |  |  |  |  |  |__ServiceRepositoryTest.java
+|  |  |  |  |  |  |__ServiceSettingRepositoryTest.java
+|  |  |  |  |  |__service/
+|  |  |  |  |  |  |__ClientServiceTest.java
 |  |  |__resources/
+|  |  |  |__application.yaml
 |__pom.xml
 ```
 
@@ -59,7 +70,7 @@ There are two branches in this repository:
 1. Unit tests  
   - slice tests  
   - testcontainers
-  - mockito
+  - mockito: `@mock`, `@mockBean`, `@spy`
   - wiremock
 2. Integration tests
   - @SpringBootTests
@@ -68,3 +79,11 @@ There are two branches in this repository:
 
 1. `test`: Using Surefire plugin
 2. `verify`: using Failsafe plugin
+
+## Takeaways
+
+- Don't test framework code
+- Reuse application context or Dirties Context
+- `@Transactional`
+- `ArgumentCaptor`
+- Testing exceptions
