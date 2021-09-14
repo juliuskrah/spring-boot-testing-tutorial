@@ -73,7 +73,8 @@ There are two branches in this repository:
   - mockito: `@mock`, `@mockBean`, `@spy`
   - wiremock
 2. Integration tests
-  - @SpringBootTests
+  - @SpringBootTest
+  - Maven failsafe plugin
 
 ## Maven goals
 

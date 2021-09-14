@@ -6,7 +6,6 @@ import java.util.UUID;
 import com.juliuskrah.demos.springboottestingtraining.dto.ClientWithServices;
 
 import org.springframework.lang.NonNull;
-import org.springframework.lang.Nullable;
 
 /**
  * @author Julius Krah
@@ -17,7 +16,14 @@ public interface ClientService {
      * @param id the identity of a client
      * @return the client with the given identity or null if non is found
      */
-    @Nullable ClientWithServices getClientById(@NonNull UUID id);
+    ClientWithServices getClientById(@NonNull UUID id);
+
+    /**
+     * Find a client given a code
+     * @param code the client code
+     * @return the client with the given code of null if non is found
+     */
+    ClientWithServices getClientByCode(String code);
 
     /**
      * Find all clients

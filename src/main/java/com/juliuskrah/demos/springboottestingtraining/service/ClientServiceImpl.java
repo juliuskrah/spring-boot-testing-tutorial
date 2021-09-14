@@ -1,9 +1,8 @@
 package com.juliuskrah.demos.springboottestingtraining.service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
-
-import javax.transaction.Transactional;
 
 import com.juliuskrah.demos.springboottestingtraining.dto.ClientWithServices;
 import com.juliuskrah.demos.springboottestingtraining.dto.ServiceDto;
@@ -11,16 +10,17 @@ import com.juliuskrah.demos.springboottestingtraining.model.Client;
 import com.juliuskrah.demos.springboottestingtraining.repository.ClientRepository;
 import com.juliuskrah.demos.springboottestingtraining.repository.ServiceRepository;
 
+import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 /**
  * @author Julius Krah
  */
 @Service
-@Transactional
+@Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class ClientServiceImpl implements ClientService {
     private final ClientRepository clientRepository;
@@ -67,9 +67,20 @@ public class ClientServiceImpl implements ClientService {
      * {@inheritDoc}
      */
     @Override
+    public ClientWithServices getClientByCode(String code) {
+        return Optional.ofNullable(
+            clientRepository.findByCodeIgnoreCase(code)
+        ).map(this::toClientDto).orElseThrow();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public List<ClientWithServices> getAllClients() {
-        // TODO Auto-generated method stub
-        return null;
+        return clientRepository.findAll()
+            .stream().map(this::toClientDto)
+            .toList();
     }
 
 }

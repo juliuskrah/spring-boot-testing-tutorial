@@ -1,5 +1,7 @@
 package com.juliuskrah.demos.springboottestingtraining.model;
 
+import static javax.persistence.FetchType.LAZY;
+
 import java.io.Serializable;
 import java.util.UUID;
 
@@ -22,6 +24,6 @@ public class Service implements Serializable {
     private String code;
     private String currency;
     private String queueName;
-    @ManyToOne
+    @ManyToOne(fetch = LAZY)
     private Client client;
 }

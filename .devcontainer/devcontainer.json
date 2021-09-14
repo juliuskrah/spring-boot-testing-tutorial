@@ -11,7 +11,8 @@
 
 	// Set *default* container specific settings.json values on container create.
 	"settings": { 
-		"java.home": "/docker-java-home"
+		"java.home": "/docker-java-home",
+		"java.configuration.updateBuildConfiguration": "automatic"
 	},
 	
 	// Add the IDs of extensions you want installed when the container is created.
@@ -22,9 +23,6 @@
 		"redhat.vscode-xml",
 		"ms-ossdata.vscode-postgresql"
 	],
-
-	// Use 'forwardPorts' to make a list of ports inside the container available locally.
-	// "forwardPorts": [],
 
 	// Use 'postCreateCommand' to run commands after the container is created.
 	// "postCreateCommand": "java -version",
