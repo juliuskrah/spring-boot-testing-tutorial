@@ -64,5 +64,16 @@ public class CompanyServiceImpl implements CompanyService {
             .map(this::toServiceDto)
             .toList();
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<ServiceDto> findServicesForClient(String clientCode) {
+        return serviceRepository.findByClientCodeIgnoreCase(clientCode)
+            .stream()
+            .map(this::toServiceDto)
+            .toList();
+    }
     
 }

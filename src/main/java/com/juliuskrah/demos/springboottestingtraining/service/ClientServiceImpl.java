@@ -45,13 +45,12 @@ public class ClientServiceImpl implements ClientService {
 
     private ClientWithServices toClientDto(Client client) {
         var services = serviceRepository.findByClientCodeIgnoreCase(client.getCode());
-        var cws = new ClientWithServices(
+        return new ClientWithServices(
             client.getId(), 
             client.getName(),
             client.getCode(), 
             client.getContactPerson(), 
             toServiceDto(services));
-        return cws;
     }
 
     /**

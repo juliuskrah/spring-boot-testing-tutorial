@@ -28,4 +28,11 @@ public interface CompanyService {
      * @return all services
      */
     List<ServiceDto> findAllServices();
+
+    /**
+     * Find all services for client with given code
+     * @param clientCode the client id
+     * @return all services for the provided client code
+     */
+    List<ServiceDto> findServicesForClient(String clientCode);
 }

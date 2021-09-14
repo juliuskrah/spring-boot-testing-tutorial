@@ -1,8 +1,10 @@
 package com.juliuskrah.demos.springboottestingtraining.service;
 
 import static org.assertj.core.api.Assertions.allOf;
+import static org.assertj.core.api.Assumptions.assumeThat;
 import static org.assertj.core.api.BDDAssertions.then;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.BDDMockito.given;
 
 import java.util.List;
@@ -83,5 +85,17 @@ class CompanyServiceTest {
         var series = List.of("rick & morty", "family guy");
         var tvShows = new Condition<String>(series::contains, "TV shows");
         then(services).extracting("name", String.class).are(tvShows);
+    }
+
+    @Test
+    @DisplayName("Test find all services by client code")
+    void testFindAllByClientCode(@Autowired CompanyService companyService) {
+        given(serviceRepository.findByClientCodeIgnoreCase(anyString())).willReturn(buiServices("wanda vision"));
+
+        var services = companyService.findServicesForClient("wanda");
+        assumeThat(services).isNotEmpty();
+        then(services).hasSize(1)
+            .usingElementComparatorIgnoringFields("currency", "name", "id", "client")
+            .containsExactlyInAnyOrder(new ServiceDto(null, null, "WANDA VISION", null, "wanda vision_queueName", ""));
     }
 }

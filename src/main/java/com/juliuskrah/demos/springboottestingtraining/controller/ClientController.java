@@ -37,10 +37,9 @@ public class ClientController {
         return clientService.getClientByCode(code);
     }
 
-    @GetMapping(path = "/{id}/services")
-    public List<ServiceDto> servicesByClient(@PathVariable UUID id) {
-        // TODO find services by client
-        return companyService.findAllServices();
+    @GetMapping(path = "/{clientCode}/services")
+    public List<ServiceDto> servicesByClient(@PathVariable String clientCode) {
+        return companyService.findServicesForClient(clientCode);
     }
     
 }
