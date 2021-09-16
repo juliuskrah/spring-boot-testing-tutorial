@@ -16,18 +16,18 @@ public interface ClientService {
      * @param id the identity of a client
      * @return the client with the given identity or null if non is found
      */
-    ClientWithServices getClientById(@NonNull UUID id);
+    ClientWithServices findClientById(@NonNull UUID id);
 
     /**
      * Find a client given a code
      * @param code the client code
      * @return the client with the given code of null if non is found
      */
-    ClientWithServices getClientByCode(String code);
+    ClientWithServices findClientByCode(String code);
 
     /**
      * Find all clients
      * @return all clients
      */
-    List<ClientWithServices> getAllClients();
+    List<ClientWithServices> findAllClients();
 }

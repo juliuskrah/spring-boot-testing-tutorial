@@ -91,7 +91,7 @@ class ClientServiceTest {
             )
         );
 
-        var client = clientService.getClientById(UUID.fromString("7602bbdd-ec04-4337-993e-3fdb1be76310"));
+        var client = clientService.findClientById(UUID.fromString("7602bbdd-ec04-4337-993e-3fdb1be76310"));
         assertThat(client).isNotNull()
             .usingRecursiveComparison()
             .ignoringExpectedNullFields().isEqualTo(expected);
@@ -107,7 +107,7 @@ class ClientServiceTest {
         );
         when(clientRepository.findByCodeIgnoreCase(anyString())).thenReturn(buildClient("freedom"));
 
-        var client = clientService.getClientByCode("FREEDOM");
+        var client = clientService.findClientByCode("FREEDOM");
         assertThat(client).isNotNull()
             .extracting("services", InstanceOfAssertFactories.LIST)
             .hasOnlyElementsOfType(ServiceDto.class)
@@ -133,7 +133,7 @@ class ClientServiceTest {
         );
         when(clientRepository.findAll()).thenReturn(buildClients("becl's pizza", "charge carpentary"));
 
-        var clients = clientService.getAllClients();
+        var clients = clientService.findAllClients();
         var expected = List.of(
             new ServiceDto(null, "broccoli toppings", "BROCCOLI TOPPINGS", null, "broccoli toppings_queueName", "broccoli toppings client"),
             new ServiceDto(null, "sausage toppings", "SAUSAGE TOPPINGS", null, "sausage toppings_queueName", "sausage toppings client"),
@@ -163,7 +163,7 @@ class ClientServiceTest {
     void testFindByIdThrows() {
         when(clientRepository.findById(any(UUID.class))).thenReturn(Optional.empty());
         assertThatExceptionOfType(NoSuchElementException.class).isThrownBy(() 
-            -> clientService.getClientById(UUID.fromString("7602bbdd-ec04-4337-993e-3fdb1be76310"))
+            -> clientService.findClientById(UUID.fromString("7602bbdd-ec04-4337-993e-3fdb1be76310"))
         ).withMessage("No value present")
         .withNoCause();
     }
@@ -172,7 +172,7 @@ class ClientServiceTest {
     @DisplayName("Test find client by code throws exception")
     void testFindByCodeThrows() {
         assertThatExceptionOfType(NoSuchElementException.class).isThrownBy(() 
-            -> clientService.getClientByCode(anyString())
+            -> clientService.findClientByCode(anyString())
         ).withMessage("No value present")
         .withNoCause();
     }

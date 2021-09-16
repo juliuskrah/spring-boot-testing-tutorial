@@ -1,5 +1,6 @@
 package com.juliuskrah.demos.springboottestingtraining.model;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 import javax.persistence.EmbeddedId;
@@ -13,6 +14,7 @@ import lombok.Data;
 @Data
 @Entity
 public class ServiceSetting implements Serializable {
+    @Serial
     private static final long serialVersionUID = 3L;
     @EmbeddedId
     private ServiceSettingId id;

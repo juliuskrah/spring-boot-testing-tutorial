@@ -2,6 +2,7 @@ package com.juliuskrah.demos.springboottestingtraining.model;
 
 import static javax.persistence.FetchType.LAZY;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.UUID;
 
@@ -17,6 +18,7 @@ import lombok.Data;
 @Data
 @Entity
 public class Service implements Serializable {
+    @Serial
     private static final long serialVersionUID = 2L;
     @Id
     private UUID id;

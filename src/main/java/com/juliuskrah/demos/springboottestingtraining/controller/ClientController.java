@@ -2,6 +2,7 @@ package com.juliuskrah.demos.springboottestingtraining.controller;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.concurrent.CompletableFuture;
 
 import com.juliuskrah.demos.springboottestingtraining.dto.ClientWithServices;
 import com.juliuskrah.demos.springboottestingtraining.dto.ServiceDto;
@@ -24,17 +25,19 @@ public class ClientController {
 
     @GetMapping(path="/{id}")
     public ClientWithServices client(@PathVariable UUID id) {
-        return clientService.getClientById(id);
+        return clientService.findClientById(id);
     }
 
     @GetMapping(path="/")
     public List<ClientWithServices> clients() {
-        return clientService.getAllClients();
+        return clientService.findAllClients();
     }
 
     @GetMapping(path="/{code}/code")
-    public ClientWithServices clientByCode(@PathVariable String code) {
-        return clientService.getClientByCode(code);
+    public CompletableFuture<ClientWithServices> clientByCode(@PathVariable String code) {
+        return CompletableFuture.completedFuture(
+            clientService.findClientByCode(code)
+        );
     }
 
     @GetMapping(path = "/{clientCode}/services")

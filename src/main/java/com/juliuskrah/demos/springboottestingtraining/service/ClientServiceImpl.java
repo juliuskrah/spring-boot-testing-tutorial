@@ -57,7 +57,7 @@ public class ClientServiceImpl implements ClientService {
      * {@inheritDoc}
      */
     @Override
-    public ClientWithServices getClientById(UUID id) {
+    public ClientWithServices findClientById(UUID id) {
         return clientRepository.findById(id)
             .map(this::toClientDto).orElseThrow();
     }
@@ -66,7 +66,7 @@ public class ClientServiceImpl implements ClientService {
      * {@inheritDoc}
      */
     @Override
-    public ClientWithServices getClientByCode(String code) {
+    public ClientWithServices findClientByCode(String code) {
         return Optional.ofNullable(
             clientRepository.findByCodeIgnoreCase(code)
         ).map(this::toClientDto).orElseThrow();
@@ -76,7 +76,7 @@ public class ClientServiceImpl implements ClientService {
      * {@inheritDoc}
      */
     @Override
-    public List<ClientWithServices> getAllClients() {
+    public List<ClientWithServices> findAllClients() {
         return clientRepository.findAll()
             .stream().map(this::toClientDto)
             .toList();

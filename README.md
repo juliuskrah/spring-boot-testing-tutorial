@@ -22,7 +22,11 @@ There are two branches in this repository:
 |  |  |__java/
 |  |  |  |__com/juliuskrah/demos/springboottestingtraining/
 |  |  |  |  |__SpringBootTestingTrainingApplication.java
+|  |  |  |  |  |__controller/
+|  |  |  |  |  |  |__ClientController.java
 |  |  |  |  |  |__dto/
+|  |  |  |  |  |  |__ClientWithServices.java
+|  |  |  |  |  |  |__ServiceDto.java
 |  |  |  |  |  |__model/
 |  |  |  |  |  |  |__Client.java
 |  |  |  |  |  |  |__Service.java
@@ -48,12 +52,15 @@ There are two branches in this repository:
 |  |  |__java/
 |  |  |  |__com/juliuskrah/demos/springboottestingtraining/
 |  |  |  |  |__SpringBootTestingTrainingApplication.java
+|  |  |  |  |  |__controller/
+|  |  |  |  |  |  |__ClientControllerTest.java
 |  |  |  |  |  |__repository/
 |  |  |  |  |  |  |__ClientRepositoryTest.java
 |  |  |  |  |  |  |__ServiceRepositoryTest.java
 |  |  |  |  |  |  |__ServiceSettingRepositoryTest.java
 |  |  |  |  |  |__service/
 |  |  |  |  |  |  |__ClientServiceTest.java
+|  |  |  |  |  |  |__CompanyServiceTest.java
 |  |  |__resources/
 |  |  |  |__application.yaml
 |__pom.xml
@@ -63,7 +70,7 @@ There are two branches in this repository:
 - `model`: contains the `domain objects`
 - `controler`: contains the anotated controllers
 - `service`: contains the `business objects`
-- `utilities`: contains the utility classes
+- `dto`: contains the `data transfer objects`
 
 ## What is covered
 
