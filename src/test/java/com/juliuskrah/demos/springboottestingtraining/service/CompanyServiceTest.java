@@ -57,7 +57,7 @@ class CompanyServiceTest {
         given(serviceRepository.findById(any(UUID.class))).willReturn(Optional.of(buildService("jeremy's bakery")));
 
         var name = new Condition<ServiceDto>(service -> 
-            service.getName().equals("jeremy's bakery"), "Service has name: build and construct");
+            service.name().equals("jeremy's bakery"), "Service has name: build and construct");
         var service = companyService.findServiceById(UUID.randomUUID());
         then(service).is(name);
     }
@@ -68,9 +68,9 @@ class CompanyServiceTest {
         given(serviceRepository.findById(any(UUID.class))).willReturn(Optional.of(buildService("build and construct")));
 
         var code = new Condition<ServiceDto>(service -> 
-            service.getCode().equals("BUILD AND CONSTRUCT"), "Service has code: BUILD AND CONSTRUCT");
+            service.code().equals("BUILD AND CONSTRUCT"), "Service has code: BUILD AND CONSTRUCT");
         var name = new Condition<ServiceDto>(service -> 
-            service.getName().equals("build and construct"), "Service has name: build and construct");
+            service.name().equals("build and construct"), "Service has name: build and construct");
         var service = companyService.findServiceById(UUID.randomUUID());
         then(service).has(allOf(code, name));
     }
